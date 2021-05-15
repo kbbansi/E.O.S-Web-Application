@@ -1,3 +1,3 @@
-let serverUrl = "http://localhost:3000/"
+let serverUrl = "https://eos-adinkrah-enterprise-api.herokuapp.com/"
 
 export {serverUrl}
