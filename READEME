@@ -28,7 +28,7 @@ npm start
 In your browser, navigate to **localhost:4200** to see your running application
 
 To start the Backend application, 
-- Import the **application.sql** script into a MySQL or MariaDb instance of your choice
+- Import the **[application.sql](https://github.com/kbbansi/E.O.S-Web-Application/blob/master/e.o.s-backend/config/application.sql)** script into a MySQL or MariaDb instance of your choice
 - Change the database credentials to match your local credentials
 - Run the following command in the e.o.s-backend folder
 ```bash
