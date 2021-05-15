@@ -1,0 +1,99 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-4 col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <!-- Add Category Button -->
+          <button class="btn btn-sm btn-primary" data-toggle="modal" (click)="openAddCategoryModal(addCategoryModal)">
+            Add a Category <i class="fa fa-plus"></i>
+          </button>
+        </div>
+        <div class="card-body">
+          <!-- Category list -->
+          <table class="table table-hover">
+            <thead class="text-uppercase">
+                <th>Categories</th>
+            </thead>
+            <tbody *ngIf="categoryBucket.length > 0">
+              <tr *ngFor="let c of categoryBucket" (click)="getCategoryInfo(c)">
+                <td> {{ c.categoryName }} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Details -->
+    <div class="col-lg-8 col-md-8">
+      <div class="card">
+        <div class="card-header">
+          Category Details
+        </div>
+        <div class="card-body">
+          <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-info-circle text-muted">Info Tab</i>
+              </ng-template>
+              <form>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Category Name</label>
+                    <div class="form-group">
+                      <input class="form-control" type="text" placeholder="{{categoryName}}" disabled>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Category Description</label>
+                    <div class="form-group">
+                      <textarea class="form-control" cols="10" rows="5" placeholder="{{description}}" disabled></textarea>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Category Modal-->
+<ng-template #addCategoryModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-right">Add a Category</h4>
+    <button class="close pull-right" type="button" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="categoryForm">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Category Name</label>
+            <input type="text" class="form-control" formControlName="categoryName">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Add a Description</label>
+            <textarea class="form-control" formControlName="description" cols="30" rows="10"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-sm btn-block btn-primary" (click)="addCategory()">Add Category</button>
+    </div>
+  </form>
+</ng-template>

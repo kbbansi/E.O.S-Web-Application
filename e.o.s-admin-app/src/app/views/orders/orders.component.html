@@ -1,0 +1,31 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">Orders</div>
+        <div class="card-body">
+          <table class="table table-responsive-sm">
+            <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer Name</th>
+              <th>Total Cost</th>
+              <th>Order Status</th>
+              <th>Date</th>
+            </tr>
+            </thead>
+            <tbody *ngIf="orderBucket.length > 0">
+              <tr *ngFor="let o of orderBucket">
+                <td> {{ o.orderID }} </td>
+                <td> {{ o.user }} </td>
+                <td> GHC {{ o.total }} </td>
+                <td>Fulfilled</td>
+                <td> {{ o.date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
