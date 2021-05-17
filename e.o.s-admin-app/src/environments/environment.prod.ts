@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   // added api endpoint
-   api: 'https://eos-adinkrah-enterprise-api.herokuapp.com'
+   api: 'https://eosadinkra.herokuapp.com'
 };
