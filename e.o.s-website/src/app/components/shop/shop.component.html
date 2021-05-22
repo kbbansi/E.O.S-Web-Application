@@ -1,0 +1,34 @@
+<header class="site-header sticky-top py-1">
+    <nav class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#" aria-label="Product">
+            <p>E.O.S Adinkrah Enterprise</p>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" [routerLink]="['/']">Home</a>
+        <a class="py-2 d-none d-md-inline-block" [routerLink]="['/shop']">Cart</a>
+        <a class="py-2 d-none d-md-inline-block" [routerLink]="['/profile']">My Account</a>
+        <a class="py-2 d-none d-md-inline-block" [routerLink]="['/']">Logout</a>
+    </nav>
+</header>
+<main>
+    <!-- category dropdown here -->
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">shopping Spree!!</h1>
+                <p class="lead text-muted">Shop from our prestigous collection of kente</p>
+                <p>
+                    <a routerLink="kente-men" class="btn btn-primary my-2">Kente for Men</a> |
+                    <a routerLink="kente-women" class="btn btn-secondary my-2">Kente for Women</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="py-5 text-align-left container" *ngIf="categories.length > 0">
+        <ul class="nav">
+            <li class="nav-item" *ngFor="let c of categories">
+                <a class="py-2 d-none d-md-inline-block nav-link" routerLink="category/{{c.id}}">{{c.categoryName}}</a>
+            </li>
+        </ul>
+    </section>
+    <router-outlet></router-outlet>
+</main>

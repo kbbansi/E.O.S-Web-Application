@@ -1,0 +1,60 @@
+<header class="site-header sticky-top py-1">
+    <nav class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#" aria-label="Product">
+            <p>E.O.S Adinkrah Enterprise</p>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" [routerLink]="['/']">Home</a>
+        <a class="py-2 d-none d-md-inline-block" [routerLink]="['/shop']">Shop</a>
+        <a class="py-2 d-none d-md-inline-block" [routerLink]="['/register']">Sign Up</a>
+        <a class="py-2 d-none d-md-inline-block" [routerLink]="['/login']">Login</a>
+    </nav>
+</header>
+
+<main>
+    <div class="container py-4">
+        <header class="pb-3 mb-4 border-bottom">
+            <span class="fs-4 d-flex align-items-center text-dark text-decoration-none">Login</span>
+        </header>
+
+        <!-- <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <p class="col-md-8 fs-4">Fill the form below to create your account</p>
+            </div>
+        </div> -->
+
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h6>Enter your user credentials</h6>
+                    <form [formGroup]="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="text" class="form-control" placeholder="akuamansa@something.com" formControlName="email">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" placeholder="xxxxxxx" formControlName="password">
+                        </div>
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col">
+                                    <button class="w-30 btn btn-primary btn-lg" (click)="login()">Login</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <img src="../../../assets/Login-rafiki.svg" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+
+        <footer class="pt-3 mt-4 text-muted border-top">
+            &copy; 2021 E.O.S Enterprise
+        </footer>
+    </div>
+</main>
