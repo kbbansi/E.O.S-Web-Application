@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'adinkrah';
+  firstName: any;
+
+  constructor() {
+    this.firstName = sessionStorage.getItem('firstName');
+    console.log(this.firstName)
+  }
 }
