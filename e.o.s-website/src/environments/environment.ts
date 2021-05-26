@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  SERVER_URL: 'http://localhost:3500/'
+  SERVER_URL: 'http://localhost:3500/',
+  paymentAPI: 'http://localhost:3400/'
 };
 
 /*

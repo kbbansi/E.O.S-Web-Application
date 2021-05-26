@@ -15,6 +15,10 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductTagComponent } from './components/product-tag/product-tag.component';
 import { ProductCategoryComponent } from './components/product-category/product-category.component';
 import { LoginComponent } from './components/login/login.component';
+import { OrderComponent } from './components/order/order.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
+import { ProfileIndexComponent } from './components/profile-index/profile-index.component';
+import { Angular4PaystackModule } from "angular4-paystack";
 
 @NgModule({
   declarations: [
@@ -28,7 +32,10 @@ import { LoginComponent } from './components/login/login.component';
     ProductsComponent,
     ProductTagComponent,
     ProductCategoryComponent,
-    LoginComponent
+    LoginComponent,
+    OrderComponent,
+    AccountDetailsComponent,
+    ProfileIndexComponent
   ],
   imports: [
     BrowserModule,

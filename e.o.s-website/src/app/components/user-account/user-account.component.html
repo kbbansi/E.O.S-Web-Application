@@ -29,48 +29,7 @@
     </div>
 
     <main>
-        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-            <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">My Orders</h4>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>View all Items Purchased</li>
-                        </ul>
-                        <button type="button" class="w-100 btn btn-lg btn-outline-dark">View all Orders</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">My Details</h4>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>Edit your information here</li>
-                        </ul>
-                        <button type="button" class="w-100 btn btn-lg btn-dark">View & Edit </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                    <div class="card-header py-3 text-white bg-dark border-dark">
-                        <h4 class="my-0 fw-normal">Let's Go Shopping!!</h4>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>Let's get busy at the shop</li>
-                        </ul>
-                        <button type="button" class="w-100 btn btn-lg btn-dark">Shop Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <router-outlet></router-outlet>
     </main>
 
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
@@ -81,7 +40,6 @@
         </div>
     </footer>
 </div>
-
 <!-- 
       
       <h2 class="display-6 text-center mb-4">Compare plans</h2>

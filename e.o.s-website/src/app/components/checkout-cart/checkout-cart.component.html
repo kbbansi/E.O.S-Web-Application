@@ -1,1 +1,71 @@
-<p>checkout-cart works!</p>
+<div class="container py-3">
+  <header class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+    <a class="d-flex align-items-center text-dark text-decoration-none">
+      <span class="fs-4">My Cart</span>
+    </a>
+  </header>
+  <main>
+    <p (click)="goBack()">Back to Shop</p>
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-dark">Products</span>
+          <!-- <span class="badge bg-primary rounded-pill">3</span> -->
+        </h4>
+        <ul class="list-group mb-3" *ngFor="let i of item">
+          <li class="list-group-item d-flex justify-content-between lh-sm" (click)="getDetails(i)">
+            <div>
+              <h6 class="my-0">{{i.productName}}</h6>
+              <small class="text-muted">Description: {{i.description}}</small>
+              <br>
+              <small class="text-muted">Quantity: {{i.quantity}} </small>
+            </div>
+            <span class="text-muted">GHC {{i.price}}</span>
+          </li>
+        </ul>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total (GHC)</span>
+          <strong>{{total}}</strong>
+        </li>
+        <form class="card p-2">
+          <div class="btn-group">
+            <!-- (click)="checkingOut()" -->
+            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Checkout</button> | 
+            <button type="submit" class="btn btn-sm btn-secondary" (click)="clearCart()">Clear the Cart</button>
+          </div>
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Payment Option</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Pay Now or Pay on Delivery
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="payStack()">Pay Now</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="checkingOut()">Pay On Delivery</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>Item Image</h2>
+          <img src="{{productImage}}" alt="" style="width: auto; height: 300px;">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+        <small class="d-block mb-3 text-muted">&copy; 2021 E.O.S Enterprise</small>
+      </div>
+    </div>
+  </footer>
+</div>
