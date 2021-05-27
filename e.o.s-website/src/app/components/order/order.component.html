@@ -6,78 +6,32 @@
     <table class="table text-center">
         <thead>
             <tr>
-                <th style="width: 34%;"></th>
-                <th style="width: 22%;">Free</th>
-                <th style="width: 22%;">Pro</th>
-                <th style="width: 22%;">Enterprise</th>
+                <th style="width: 4%;"></th>
+                <th style="width: 12%;">Item</th>
+                <th style="width: 22%;">Cost (GHC)</th>
+                <th style="width: 22%;">Date</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <th scope="row" class="text-start">Public</th>
+        <tbody *ngIf="userOrders.length > 0">
+            <tr *ngFor="let u of userOrders | paginate: {itemsPerPage:5, currentPage: pageNum}">
+                <th scope="row" class="text-start">{{u.orderID}}</th>
+                <td><svg class="bi" width="14" height="24">
+                        <use xlink:href="#check" />
+                    </svg>
+                {{u.products}}
+                </td>
                 <td><svg class="bi" width="24" height="24">
                         <use xlink:href="#check" />
-                    </svg></td>
+                    </svg>
+                {{u.total}}
+                </td>
                 <td><svg class="bi" width="24" height="24">
                         <use xlink:href="#check" />
-                    </svg></td>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
-            </tr>
-            <tr>
-                <th scope="row" class="text-start">Private</th>
-                <td></td>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
-            </tr>
-        </tbody>
-
-        <tbody>
-            <tr>
-                <th scope="row" class="text-start">Permissions</th>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
-            </tr>
-            <tr>
-                <th scope="row" class="text-start">Sharing</th>
-                <td></td>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
-            </tr>
-            <tr>
-                <th scope="row" class="text-start">Unlimited members</th>
-                <td></td>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
-            </tr>
-            <tr>
-                <th scope="row" class="text-start">Extra security</th>
-                <td></td>
-                <td></td>
-                <td><svg class="bi" width="24" height="24">
-                        <use xlink:href="#check" />
-                    </svg></td>
+                    </svg>
+                    {{u.date}}
+                </td>
             </tr>
         </tbody>
     </table>
+    <pagination-controls (pageChange)="pageNum=$event"></pagination-controls>
 </div>

@@ -18,7 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { OrderComponent } from './components/order/order.component';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
 import { ProfileIndexComponent } from './components/profile-index/profile-index.component';
-import { Angular4PaystackModule } from "angular4-paystack";
+import { NgxPaginationModule } from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { Angular4PaystackModule } from "angular4-paystack";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -44,7 +44,10 @@ export class ApiService {
     return this.https.put(this.api + 'users/user/' + d.id, d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
   }
 
-  getUserOrders(id){}
+  getUserOrders(id){
+    console.log(`Fetching user orders with id: ${id}.....`);
+    return this.https.get(this.api + 'orders/' + id, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+  }
 
   placeOrder(d) {
     return this.https.post(this.api + 'orders/create', d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
