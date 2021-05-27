@@ -29,6 +29,7 @@ export class UserAccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScript()
+    this.checkLogin();
   }
 
   public loadScript() {
@@ -41,11 +42,19 @@ export class UserAccountComponent implements OnInit {
     body.appendChild(script);
   }
 
+  checkLogin() {
+    if (sessionStorage.getItem('id')) {
+      console.log(sessionStorage.getItem('id'));
+      console.info('User is logged in')
+    } else {
+      alert('You cannot view this page without logging in first\nPlease login now');
+      this.router.navigate(['/login']);
+    }
+  }
   logout(){
     console.log('Bye Bye %s', this.firstName);
     sessionStorage.clear();
     this.router.navigate(['/'])
-
   }
 
 }

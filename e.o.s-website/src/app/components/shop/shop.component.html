@@ -6,7 +6,7 @@
         <a class="py-2 d-none d-md-inline-block" [routerLink]="['/']">Home</a>
         <a class="py-2 d-none d-md-inline-block" [routerLink]="['/view-cart']">Cart</a>
         <a class="py-2 d-none d-md-inline-block" [routerLink]="['/profile']">My Account</a>
-        <a class="py-2 d-none d-md-inline-block" [routerLink]="['/']">Logout</a>
+        <a class="py-2 d-none d-md-inline-block" (click)="logout()">Logout</a>
     </nav>
 </header>
 <main>

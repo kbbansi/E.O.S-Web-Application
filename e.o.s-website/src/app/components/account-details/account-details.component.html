@@ -1,4 +1,134 @@
 <p (click)="goBack()">Go Back</p>
 <h6 class="display-6 text-center mb-4">Account Details</h6>
-
-<div></div>
+<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+            role="tab" aria-controls="home" aria-selected="true">Summary</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+            role="tab" aria-controls="profile" aria-selected="false">Edit Details</button>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <br>
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>User Details</h2>
+                    <hr>
+                    <p>First Name: {{firstName}} </p>
+                    <p>Last Name: {{lastName}} </p>
+                    <p>Username: {{userName}} </p>
+                    <p>Email Address: {{email}} </p>
+                    <p>Contact No.: {{contactNo}} </p>
+                    <!-- <button class="btn btn-outline-light" type="button">Example button</button> -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>Shipping Information</h2>
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Street Name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                placeholder="{{streetName}}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Street No</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="{{streetNo}}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-check-label" for="exampleCheck1">District</label>
+                            <input type="text" class="form-control" id="exampleCheck1" placeholder="{{district}}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-check-label" for="region">Region</label>
+                            <input type="text" class="form-control" id="region" placeholder="{{region}}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-check-label" for="gps">Digital Address</label>
+                            <input type="text" class="form-control" id="gps" placeholder="{{ghanaPostCode}}" disabled>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <br>
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>User Details</h2>
+                    <hr>
+                    <form [formGroup]="userDetailsForm">
+                        <div class="mb-3">
+                            <label for="firstNameInput" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstNameInput" aria-describedby="emailHelp"
+                                formControlName="firstName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastNameInput" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastNameInput" formControlName="lastName">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-check-label" for="otherNamesInput">Other Names</label>
+                            <input type="text" class="form-control" id="otherNamesInput" formControlName="otherNames">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-check-label" for="email">Email</label>
+                            <input type="email" class="form-control" id="email" formControlName="email">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-check-label" for="username">User Name</label>
+                            <input type="text" class="form-control" id="username" formControlName="userName">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-check-label" for="contact">Contact No</label>
+                            <input type="tel" class="form-control" id="contact" formControlName="contactNo">
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="saveUserDetails()">Update Details</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>Shipping Information</h2>
+                    <form [formGroup]="shippingInfoForm">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Street Name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                formControlName="streetName">
+                            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Street No</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" formControlName="streetNo">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-check-label" for="exampleCheck1">District</label>
+                            <input type="text" class="form-control" id="exampleCheck1" formControlName="district">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-check-label" for="region">Select Region</label>
+                            <select class="form-select" name="region" id="region" formControlName="region">
+                                <option selected>Open this select menu</option>
+                                <option value="GreaterAccra">Greater Accra</option>
+                                <option value="Ashanti">Ashanti</option>
+                                <option value="Western North">Western North</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-check-label" for="gps">Digital Address</label>
+                            <input type="text" class="form-control" id="gps" formControlName="ghanaPostCode">
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="saveShippingInfo()">Submit</button>
+                    </form>
+                    <!-- <button class="btn btn-outline-secondary" type="button">Example button</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

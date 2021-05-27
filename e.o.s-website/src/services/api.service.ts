@@ -28,7 +28,23 @@ export class ApiService {
     return this.https.get(this.api + 'product/' + id, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
   }
 
-  getUserDetails(id){}
+  getUserShippingInfo(id){
+    // will return user shipping info
+    return this.https.get(this.api + 'users/address/user/' + id, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+  }
+
+  createUserShippingInfo(d) {
+    // create shipping info for a user
+    console.log(d.id)
+    return this.https.post(this.api + 'users/address/delivery-address/' + d.id, d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+  }
+
+  updateUserDetails(d){
+    console.log(d.id);
+    return this.https.put(this.api + 'users/user/' + d.id, d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+  }
+
+  getUserOrders(id){}
 
   placeOrder(d) {
     return this.https.post(this.api + 'orders/create', d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
@@ -46,7 +62,7 @@ export class ApiService {
       switch (error.status) {
         case 404:
           console.error(`Server Returned: ${error.status}. Dev Message: ${error.message}`);
-          alert('No Products Now... Check back soon!!');
+          alert('No Data Found');
           break;
         case 500:
           console.error(`Server Returned: ${error.status}. Dev Message: ${error.message}`);
