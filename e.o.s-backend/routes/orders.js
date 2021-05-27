@@ -303,7 +303,7 @@ function sendOrderEmail(productName, userID, totalPrice) {
             // send email
             mailDataObject = {
                 to: rows[0].email,
-                from: 'jennifer.tagoe@regent.edu.gh',
+                from: 'kwabenaampofo5@gmail.com',
                 subject: 'Order Fulfillment',
                 firstName: rows[0].firstName,
                 productName: productName,
