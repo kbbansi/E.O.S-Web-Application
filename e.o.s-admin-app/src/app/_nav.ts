@@ -144,6 +144,11 @@ export const navItems: INavData[] = [
     url: '/orders',
     icon: 'fa fa-shopping-basket'
   },
+  {
+    name: 'Reports',
+    url: '/reports',
+    icon: 'fa fa-database'
+  }
   /*
   {
     name: 'Profile',

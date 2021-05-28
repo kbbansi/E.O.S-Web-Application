@@ -22,6 +22,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { ExcelService } from "../services/excel.service";
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -52,6 +53,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { PromotionsComponent } from './views/promotions/promotions.component';
+import { ReportsComponent } from './views/reports/reports.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -91,7 +93,8 @@ import { PromotionsComponent } from './views/promotions/promotions.component';
     CategoryComponent,
     OrdersComponent,
     ProfileComponent,
-    PromotionsComponent
+    PromotionsComponent,
+    ReportsComponent
   ],
   providers: [
     {
@@ -99,6 +102,7 @@ import { PromotionsComponent } from './views/promotions/promotions.component';
       useClass: HashLocationStrategy
     },
     IconSetService,
+    ExcelService
   ],
   bootstrap: [ AppComponent ]
 })

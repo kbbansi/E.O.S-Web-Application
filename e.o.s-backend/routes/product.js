@@ -15,6 +15,8 @@ router.post('/create', function (req, res, err) {
             productImage: req.body.productImage,
             description: req.body.description,
             stock: req.body.stock,
+            colour: req.body.colour,
+            tag: req.body.tag,
             createdOn: new Date()
         };
 
@@ -62,7 +64,10 @@ router.post('/create', function (req, res, err) {
 
 // get all products
 router.get('/', function (req, res) {
-    query = `select products.id, products.productName, products.price, products.productImage, categories.categoryName as category, products.description, products.stock, products.createdOn
+    query = `select products.id, products.productName, 
+            products.price, products.productImage, 
+            categories.categoryName as category, products.description, products.stock, 
+            products.colour, products.tag, products.createdOn
     from products
     join categories  on products.categoryID = categories.id
      order by id desc`;
@@ -95,7 +100,10 @@ router.get('/', function (req, res) {
 // get one product
 router.get('/:id', function (req, res) {
     id = req.params.id;
-    query = `select products.id, products.productName, products.price, products.productImage, categories.categoryName as category, products.description, products.stock, products.createdOn
+    query = `select products.id, products.productName, 
+        products.price, products.productImage, 
+        categories.categoryName as category, products.description, products.stock, 
+        products.colour, products.tag, products.createdOn
     from products
     join categories  on products.categoryID = categories.id
     where products.id = ${id}`;
@@ -127,6 +135,8 @@ router.get('/:id', function (req, res) {
     });
 });
 
+// get product by tag
+
 // update one product
 router.put('/update/:id', function (req, res) {
     id = req.params.id
@@ -138,7 +148,9 @@ router.put('/update/:id', function (req, res) {
             price: req.body.price,
             productImage: req.body.productImage,
             description: req.body.description,
-            stock: req.body.stock
+            stock: req.body.stock,
+            tag: req.body.tag,
+            colour: req.body.colour
         };
 
         if (isEmpty(product.productName) || isEmpty(product.categoryID)) {

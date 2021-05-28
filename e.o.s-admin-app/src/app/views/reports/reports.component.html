@@ -1,0 +1,85 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg col-lg-12">
+            <tabset>
+                <tab>
+                    <ng-template tabHeading>Daily Sales Reports</ng-template>
+                    <div class="card">
+                        <div class="card-header">
+                            <button class="btn btn-sm btn-primary" data-toggle="modal" (click)="downloadDailyReport()">
+                                <i class="fa fa-database"></i>
+                                Download Daily Report
+                            </button>
+                            <div class="card-header-actions" style="height: 15px; width: 300px;">
+                                <form [formGroup]="dateForm">
+                                    <input type="date" name="dailyReport" class="form-control"
+                                        formControlName="reportDay" (change)="loadDailyReport()">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-responsive-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Total Cost</th>
+                                        <th>Order Status</th>
+                                        <!-- <th>Date</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="dailyReports.length > 0">
+                                    <tr *ngFor="let r of dailyReports">
+                                        <td> {{ r.orderID }} </td>
+                                        <td> {{ r.user }} </td>
+                                        <td> GHC {{ r.total }} </td>
+                                        <td>Fulfilled</td>
+                                        <!-- <td> {{ r.date }}</td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </tab>
+                <tab>
+                    <ng-template tabHeading>Monthly Reports</ng-template>
+                    <div class="card">
+                        <div class="card-header">
+                            <button class="btn btn-sm btn-primary" data-toggle="modal" (click)="downloadMonthlyReport()">
+                                <i class="fa fa-database"></i>
+                                Download Monthly Report
+                            </button>
+                            <div class="card-header-actions" style="height: 15px; width: 300px;">
+                                <form [formGroup]="monthForm">
+                                    <input type="date" name="monthlyReport" class="form-control"
+                                        formControlName="reportMonth" (change)="loadMonthlyReports()">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-responsive-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Total Cost</th>
+                                        <th>Order Status</th>
+                                        <!-- <th>Date</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="monthlyReports.length > 0">
+                                    <tr *ngFor="let m of monthlyReports">
+                                        <td> {{ m.orderID }} </td>
+                                        <td> {{ m.user }} </td>
+                                        <td> GHC {{ m.total }} </td>
+                                        <td>Fulfilled</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

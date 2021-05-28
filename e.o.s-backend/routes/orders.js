@@ -22,7 +22,8 @@ router.get('/', function (req, res) {
                 on order_customer.id = order_product.id
         inner join 
             products p 
-                on order_product.productID = p.id`;
+                on order_product.productID = p.id
+                order by order_customer.id asc`;
     db.query(query, function (err, rows) {
         if (!err) {
             if (isEmpty(rows)) {
@@ -97,11 +98,12 @@ router.get('/:id', function (req, res) {
         inner join 
             products p 
                 on order_product.productID = p.id 
-      where users.id = ${id}`;
+      where users.id = ${id}
+      order by order_customer.id desc`;
 
     db.query(query, function (err, rows) {
         console.log(query);
-        if (isEmpty(rows)){
+        if (isEmpty(rows)) {
             res.status(404);
             res.json({
                 status: 404,
@@ -152,12 +154,12 @@ router.post('/create', async function (req, res, err) {
                         console.log('Got this:-> %s', rows[0].price);
                         console.log('Got this:-> %s', rows[0].productName);
                         console.log('Got this:-> %s', rows[0].productImage);
-                        
+
                         let totalPrice = rows[0].price * order.quantity;
                         data = saveOrder(order, totalPrice);
                         sendOrderEmail(rows[0].productName, order.userID, totalPrice);
                         console.log(data);
-                        
+
                         res.status(201);
                         res.json({
                             status: 201,
@@ -246,6 +248,97 @@ router.get('/analytics/sales', function (req, res) {
     })
 });
 
+router.get('/reports/day/:reportDay', function (req, res) {
+    const reportDay = req.params.reportDay;
+    query = `
+            select order_customer.orderID as orderID, users.firstName as user, 
+                productName as products, order_product.totalPrice as total, 
+                order_product.createdOn as date
+                from users
+                    inner join order_customer on userID = users.id
+             inner join 
+                order_product 
+                    on order_customer.id = order_product.id
+            inner join 
+                products p 
+                    on order_product.productID = p.id
+                    where order_customer.createdOn like '%${reportDay}%';
+                    `
+    db.query(query, function (err, rows) {
+        if (!err) {
+            console.log(query);
+            if (isEmpty(rows)) {
+                console.log('No orders for %s', reportDay, ' found');
+                res.status(404);
+                res.json({
+                    status: 404,
+                    message: 'No orders found'
+                });
+            } else {
+                console.log(rows);
+                res.status(200);
+                res.json({
+                    status: 200,
+                    message: rows
+                });
+            }
+        } else {
+            console.log(`Got an error: ${err.message}`);
+            res.status(400);
+            res.json({
+                status: 400,
+                message: `FAIL, BAD REQUEST, ${err.message}`
+            });
+        }
+    });
+});
+
+router.get('/reports/month/:reportMonth', function (req, res) {
+    const reportMonth = req.params.reportMonth;
+    query = `
+            select order_customer.orderID as orderID, users.firstName as user, 
+                productName as products, order_product.totalPrice as total, 
+                order_product.createdOn as date
+                from users
+                    inner join order_customer on userID = users.id
+             inner join 
+                order_product 
+                    on order_customer.id = order_product.id
+            inner join 
+                products p 
+                    on order_product.productID = p.id
+                    where order_customer.createdOn like '%${reportMonth}%';
+                    `
+    db.query(query, function (err, rows) {
+        if (!err) {
+            console.log(query);
+            if (isEmpty(rows)) {
+                console.log('No orders for %s', reportMonth, ' found');
+                res.status(404);
+                res.json({
+                    status: 404,
+                    message: 'No orders found'
+                });
+            } else {
+                console.log(rows);
+                res.status(200);
+                res.json({
+                    status: 200,
+                    message: rows
+                });
+            }
+        } else {
+            console.log(`Got an error: ${err.message}`);
+            res.status(400);
+            res.json({
+                status: 400,
+                message: `FAIL, BAD REQUEST, ${err.message}`
+            });
+        }
+    });
+});
+
+
 function saveOrder(order, totalPrice) {
     order_product = {
         productID: order.productID,
@@ -303,7 +396,7 @@ function sendOrderEmail(productName, userID, totalPrice) {
             // send email
             mailDataObject = {
                 to: rows[0].email,
-                from: 'kwabenaampofo5@gmail.com',
+                from: 'jennifer.tagoe@regent.edu.gh',
                 subject: 'Order Fulfillment',
                 firstName: rows[0].firstName,
                 productName: productName,

@@ -24,13 +24,16 @@
                                             <a class="dropdown-item"
                                                 (click)="openProductDetailsModal(d, viewProductDetails)">View and
                                                 Edit</a>
-                                            <a class="dropdown-item" (click)="openDeleteProductModal(d, deleteProductModal)">Delete Product</a>
+                                            <a class="dropdown-item"
+                                                (click)="openDeleteProductModal(d, deleteProductModal)">Delete
+                                                Product</a>
                                         </div>
                                     </div>
                                     <img src="{{d.productImage}}" class="card-img-top" alt="..."
-                                        style="width: 50px; height: 70px;">
+                                        style="width: auto; height: 70px;">
                                     <div class="text-muted font-weight-bold font-xs">{{ d.productName }}</div>
                                     <div class="text-muted font-weight-bold font-xs">GHC {{ d.price }}.00</div>
+                                    <div class="text-muted font-weight-bold font-xs">{{ d.tag }}</div>
                                 </div>
                                 <!-- <div class="card-footer px-3 py-2">
                                     <a class="font-weight-bold font-xs btn-block text-muted" data-toggle="modal"
@@ -91,6 +94,23 @@
                         <label>Add an Image</label>
                         <input type="file" formControlName="file" class="form-control" (change)="uploadImage($event)"
                             accept="image/*">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Select A Tag</label>
+                        <select class="form-control" formControlName="tag">
+                            <option value="Men">Men</option>
+                            <option value="Women">Women</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Indicate a Colour</label>
+                        <input type="text" formControlName="colour" class="form-control">
                     </div>
                 </div>
             </div>
@@ -164,6 +184,23 @@
                         <label>View Existing Image</label>
                         <input type="button" class="form-control btn-sm btn-primary" (click)="openImage()"
                             value="Open Image">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Select A Tag</label>
+                        <select class="form-control" formControlName="tag">
+                            <option value="Men">Men</option>
+                            <option value="Women">Women</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Indicate a Colour</label>
+                        <input type="text" formControlName="colour" class="form-control">
                     </div>
                 </div>
             </div>

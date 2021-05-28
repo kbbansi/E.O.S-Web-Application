@@ -50,6 +50,8 @@ export class ProductComponent implements OnInit {
       file: ['', Validators.required],
       description: ['', Validators.required],
       stock: ['', Validators.required],
+      tag: ['', Validators.required],
+      colour: ['', Validators.required]
     });
   }
 
@@ -79,6 +81,8 @@ export class ProductComponent implements OnInit {
       file: ['', Validators.required],
       description: ['', Validators.required],
       stock: ['', Validators.required],
+      tag: ['', Validators.required],
+      colour: ['', Validators.required]
     });
     this.modalRef = this.modalService.show(template);
   }
@@ -92,7 +96,9 @@ export class ProductComponent implements OnInit {
       file: [d.productImage],
       productImage: ['', Validators.required],
       description: [d.description],
-      stock: [d.stock]
+      stock: [d.stock],
+      tag: [d.tag],
+      colour: [d.colour]
     });
     this.modalRef = this.modalService.show(template);
   }
@@ -169,6 +175,8 @@ export class ProductComponent implements OnInit {
       file: ['', Validators.required],
       description: ['', Validators.required],
       stock: ['', Validators.required],
+      tag: ['', Validators.required],
+      colour: ['', Validators.required]
     });
   }
 

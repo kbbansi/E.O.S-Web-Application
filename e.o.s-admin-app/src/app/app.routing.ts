@@ -12,6 +12,7 @@ import { OrdersComponent } from './views/orders/orders.component';
 import { ProductComponent } from './views/product/product.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { RegisterComponent } from './views/register/register.component';
+import { ReportsComponent } from './views/reports/reports.component';
 
 export const routes: Routes = [
   {
@@ -112,6 +113,13 @@ export const routes: Routes = [
         component: ProfileComponent,
         data: {
           title: 'Profile'
+        }
+      },
+      {
+        path: 'reports',
+        component: ReportsComponent,
+        data: {
+          title: 'Reports'
         }
       }
     ]

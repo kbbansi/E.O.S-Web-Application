@@ -39,10 +39,10 @@ export class LoginComponent implements OnInit{
     this.api.login(this.loginForm.value).subscribe(response => {
       // create user session and redirect to dashboard
       console.log(response);
-      this.dataBucket = response.message;
+      this.dataBucket = response;
       console.log(this.dataBucket);
 
-      this.createUserSession(this.dataBucket);
+      this.createUserSession(this.dataBucket.message);
      this.router.navigate(['dashboard']);
      console.log(sessionStorage.getItem('firstName'));
     })

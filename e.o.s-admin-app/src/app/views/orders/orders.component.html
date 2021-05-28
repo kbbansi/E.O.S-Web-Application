@@ -2,17 +2,21 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="card">
-        <div class="card-header">Orders</div>
+        <div class="card-header">
+          <button class="btn btn-sm btn-primary" data-toggle="modal" (click)="generateExcelReport()">
+            Generate Report <i class="fa fa-database"></i>
+          </button>
+        </div>
         <div class="card-body">
           <table class="table table-responsive-sm">
             <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Customer Name</th>
-              <th>Total Cost</th>
-              <th>Order Status</th>
-              <th>Date</th>
-            </tr>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Total Cost</th>
+                <th>Order Status</th>
+                <th>Date</th>
+              </tr>
             </thead>
             <tbody *ngIf="orderBucket.length > 0">
               <tr *ngFor="let o of orderBucket">

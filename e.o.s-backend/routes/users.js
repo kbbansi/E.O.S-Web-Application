@@ -53,7 +53,7 @@ router.post('/create', function (req, res, err) {
                 mailDataObject = {
                   to: user.email,
                   firstName: user.firstName,
-                  from: 'kwabenaampofo5@gmail.com',
+                  from: 'jennifer.tagoe@regent.edu.gh',
                   subject: 'Welcome to EOS Enterprise'
                 };
 
