@@ -89,6 +89,14 @@ export class ApiService {
     return this.https.get(this.apiUrl + '/orders/reports/month/' + d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
   }
 
+  getDailySales(d) {
+    return this.https.get(this.apiUrl + '/orders/reports/dailySales/' + d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+  }
+
+  getMonthlySales(d) {
+    return this.https.get(this.apiUrl + '/orders/reports/monthlySales/' + d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+  }
+
 
 
 

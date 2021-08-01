@@ -49,7 +49,8 @@ export class ReportsComponent implements OnInit {
       } else {
         
       }
-    })
+    });
+    this.getDailySaleTotal(this.reportDay);
   }
 
   downloadDailyReport() {
@@ -66,6 +67,21 @@ export class ReportsComponent implements OnInit {
       } else {
         this.ngOnInit();
       }
+    })
+    this.getMonthlySaleTotal(this.reportMonth);
+  }
+
+  getDailySaleTotal(d: any) {
+    console.log(d)
+    this.api.getDailySales(d).subscribe(response => {
+      console.log('Daily Sale Total: %s', response);
+    })
+  }
+
+  getMonthlySaleTotal(d: any) {
+    console.log(d)
+    this.api.getMonthlySales(d).subscribe(response => {
+      console.log('Monthly Sale Total: %s', response);
     })
   }
 
