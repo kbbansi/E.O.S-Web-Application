@@ -12,6 +12,9 @@ export class ReportsComponent implements OnInit {
   dateForm: FormGroup
   monthForm: FormGroup;
   reportDay: string;
+  totalDailySales: any = 0;
+  totalMonthlySales: any = 0;
+  saleTotal: any = {};
   reportMonth: string;
   dailyReports: any = {};
   monthlyReports: any = {};
@@ -74,14 +77,28 @@ export class ReportsComponent implements OnInit {
   getDailySaleTotal(d: any) {
     console.log(d)
     this.api.getDailySales(d).subscribe(response => {
-      console.log('Daily Sale Total: %s', response);
+      console.log(response);
+      this.saleTotal = response;
+      if (this.saleTotal.status == 200) {
+        this.totalDailySales = this.saleTotal.message[0].Daily_Sales;
+      } else {
+        return this.totalDailySales;
+      }
     })
   }
 
   getMonthlySaleTotal(d: any) {
     console.log(d)
     this.api.getMonthlySales(d).subscribe(response => {
-      console.log('Monthly Sale Total: %s', response);
+      console.log(response);
+      this.saleTotal = response;
+      console.log(this.saleTotal);
+      if (this.saleTotal.status == 200) {
+        this.totalMonthlySales = this.saleTotal.message[0].Monthly_Sales;
+        console.log(this.totalMonthlySales)
+      } else {
+        return this.totalMonthlySales;
+      }
     })
   }
 

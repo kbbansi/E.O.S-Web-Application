@@ -12,14 +12,24 @@
                             </button>
                             <div class="card-header-actions" style="height: 15px; width: 500px;">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col" *ngIf="this.totalDailySales; else showZero">
                                         <p>
                                             <span class="badge badge-pill badge-success">
                                                 <i class="fa fa-money"></i>
-                                                Total Sales: GHC 800
+                                                Total Sales: GHC {{this.totalDailySales}}
                                             </span>
                                         </p>
                                     </div>
+                                    <ng-template #showZero>
+                                        <div class="col">
+                                            <p>
+                                                <span class="badge badge-pill badge-success">
+                                                    <i class="fa fa-money"></i>
+                                                    Total Sales: GHC 0
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </ng-template>
                                     <div class="col">
                                         <form [formGroup]="dateForm">
                                             <input type="date" name="dailyReport" class="form-control"
@@ -62,11 +72,11 @@
                             </button>
                             <div class="card-header-actions" style="height: 15px; width: 500px;">
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col" *ngIf="this.totalMonthlySales; else showZero">
                                         <p class="font-weight-bold">
                                             <span class="badge badge-pill badge-success">
                                                 <i class="fa fa-money"></i>
-                                                Total Sales: GHC 1000
+                                                Total Sales: GHC {{this.totalMonthlySales}}
                                             </span>
                                         </p>
                                     </div>
