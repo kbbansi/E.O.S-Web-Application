@@ -8,25 +8,25 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Theme'
+      title: 'User Management'
     },
     children: [
       {
         path: '',
-        redirectTo: 'colors'
+        redirectTo: 'store-manager'
       },
       {
-        path: 'colors',
+        path: 'store-manager',
         component: ColorsComponent,
         data: {
-          title: 'Colors'
+          title: 'Store Managers'
         }
       },
       {
-        path: 'typography',
+        path: 'sales-person',
         component: TypographyComponent,
         data: {
-          title: 'Typography'
+          title: 'Sales Personnel'
         }
       }
     ]

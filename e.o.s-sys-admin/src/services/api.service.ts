@@ -8,7 +8,6 @@ import { environment } from '../environments/environment.prod';
   providedIn: 'root'
 })
 export class ApiService {
-
   server = environment.api;
 
   constructor(private https: HttpClient) { }
@@ -18,6 +17,36 @@ export class ApiService {
       pipe(
         catchError(ApiService.HandleErr)
       );
+  }
+
+  login(d) {
+    return this.https.post(this.server + '/auth/login', d, {observe: 'body'})
+        .pipe(catchError(ApiService.HandleErr))
+  }
+
+  addNewAdmin(d) {
+    return this.https.post(this.server + '/sys-admin/add-admin', d, {observe: 'body'})
+        .pipe(catchError(ApiService.HandleErr));
+  }
+
+  getAllUsers() {
+    return this.https.get(this.server + '/users/', {observe: 'body'})
+        .pipe(catchError(ApiService.HandleErr));
+  }
+
+  updateUser(d) {
+    return this.https.put(this.server + '/users/user/' + d.id, d, {observe: 'body'})
+        .pipe(catchError(ApiService.HandleErr));
+  }
+
+  getStoreManagers() {
+    return this.https.get(this.server + '/sys-admin/store-manager', {observe: 'body'})
+        .pipe(catchError(ApiService.HandleErr));
+  }
+
+  getSalesPersonnel() {
+    return this.https.get(this.server + '/sys-admin/sales-personnel', {observe: 'body'})
+        .pipe(catchError(ApiService.HandleErr))
   }
 
   private static HandleErr(err: HttpErrorResponse) {

@@ -10,55 +10,63 @@ import { environment } from 'src/environments/environment';
 export class ApiService {
   api = environment.SERVER_URL;
   paymentApi = environment.paymentAPI;
+  MTN_COLLECTIONS = environment.mtnCollections;
   constructor(private https: HttpClient) { }
 
-  getAllProducts(){
-    return this.https.get(this.api + 'product', {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+  getAllProducts() {
+    return this.https.get(this.api + 'product', { observe: 'body' }).pipe(catchError(ApiService.ErrHandle));
   }
 
   getAllCategories() {
-    return this.https.get(this.api + 'category', {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+    return this.https.get(this.api + 'category', { observe: 'body' }).pipe(catchError(ApiService.ErrHandle));
   }
 
   getProductCategory(id) {
-    return this.https.get(this.api + 'category/product/' + id, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+    return this.https.get(this.api + 'category/product/' + id, { observe: 'body' }).pipe(catchError(ApiService.ErrHandle));
   }
 
   getOneProduct(id) {
-    return this.https.get(this.api + 'product/' + id, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+    return this.https.get(this.api + 'product/' + id, { observe: 'body' }).pipe(catchError(ApiService.ErrHandle));
   }
 
-  getUserShippingInfo(id){
+  getUserShippingInfo(id) {
     // will return user shipping info
-    return this.https.get(this.api + 'users/address/user/' + id, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+    return this.https.get(this.api + 'users/address/user/' + id, { observe: 'body' }).pipe(catchError(ApiService.ErrHandle));
   }
 
   createUserShippingInfo(d) {
     // create shipping info for a user
     console.log(d.id)
-    return this.https.post(this.api + 'users/address/delivery-address/' + d.id, d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+    return this.https.post(this.api + 'users/address/delivery-address/' + d.id, d, { observe: 'body' }).pipe(catchError(ApiService.ErrHandle));
   }
 
-  updateUserDetails(d){
+  updateUserDetails(d) {
     console.log(d.id);
-    return this.https.put(this.api + 'users/user/' + d.id, d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+    return this.https.put(this.api + 'users/user/' + d.id, d, { observe: 'body' }).pipe(catchError(ApiService.ErrHandle));
   }
 
-  getUserOrders(id){
+  getUserOrders(id) {
     console.log(`Fetching user orders with id: ${id}.....`);
-    return this.https.get(this.api + 'orders/' + id, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+    return this.https.get(this.api + 'orders/' + id, { observe: 'body' }).pipe(catchError(ApiService.ErrHandle));
   }
 
   placeOrder(d) {
-    return this.https.post(this.api + 'orders/create', d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+    return this.https.post(this.api + 'orders/create', d, { observe: 'body' }).pipe(catchError(ApiService.ErrHandle));
   }
 
   makePayment(d) {
-    return this.https.post(this.paymentApi + 'paystack/pay', d, {observe: 'body'}).pipe(catchError(ApiService.ErrHandle));
+    return this.https.post(this.paymentApi + 'paystack/pay', d, { observe: 'body' }).pipe(catchError(ApiService.ErrHandle));
+  }
+
+  mtnCollections(d) {
+    return this.https.post(this.MTN_COLLECTIONS + '', d, {
+      observe: 'body'
+    })
+      .pipe(catchError(ApiService.ErrHandle))
   }
 
   private static ErrHandle(error: HttpErrorResponse) {
-    if (error.error  instanceof ErrorEvent) {
+    if (error.error instanceof ErrorEvent) {
       // client error
       console.error(`Client not connected to a network, Code: ${error.status}`)
     } else {

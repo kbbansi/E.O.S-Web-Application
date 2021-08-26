@@ -36,5 +36,20 @@ export class LoginComponent implements OnInit{
   login() {
     this.dataBucket = {};
     console.log(this.loginForm.value);
+    this.api.login(this.loginForm.value).subscribe(response => {
+      console.log(response);
+      this.dataBucket = response;
+      this.createUserSession(this.dataBucket.message);
+      this.router.navigate(['dashboard']);
+    })
+  }
+
+  createUserSession(d) {
+    sessionStorage.setItem('contactNo', d.contactNo);
+    sessionStorage.setItem('email', d.email);
+    sessionStorage.setItem('firstName', d.firstName);
+    sessionStorage.setItem('lastName', d.lastName);
+    sessionStorage.setItem('otherNames', d.otherNames);
+    sessionStorage.setItem('userType', d.userType);
   }
 }

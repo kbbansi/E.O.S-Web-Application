@@ -12,21 +12,21 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'User Management' // Theme
   },
   {
-    name: 'Colors',
-    url: '/theme/colors',
+    name: 'Store Managers',
+    url: '/user-management/store-manager',
     icon: 'icon-drop'
   },
   {
-    name: 'Typography',
-    url: '/theme/typography',
+    name: 'Sales Personnel',
+    url: '/user-management/sales-person',
     icon: 'icon-pencil'
   },
   {
     title: true,
-    name: 'Components'
+    name: 'Permissions' //Components
   },
   {
     name: 'Base',

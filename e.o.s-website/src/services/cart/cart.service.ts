@@ -42,7 +42,7 @@ export class CartService {
 
   decreaseQuantity(product: Product){
     console.log(product.id);
-    if (product.quantity < 0) {
+    if (product.quantity == 0) {
       alert('Removed product from cart');
       this.clearCart();
     } else {
