@@ -61,7 +61,7 @@ export class CheckoutCartComponent implements OnInit {
     alert('Clearing cart....');
   }
 
-  checkingOut() {
+  placeOrder() {
     if (sessionStorage.getItem('id')) {
       console.log(sessionStorage.getItem('id'));
       console.log('Yeaaa.....');
@@ -115,18 +115,18 @@ export class CheckoutCartComponent implements OnInit {
        */
 
       this.jenPay = {
-        message: 'Authorize Payment',
         amount: sum,
-        contactNum: ''
+        firstName:sessionStorage.getItem('firstName'),
+        email: 'kwabenaampofo5@gmail.com'
       }
 
-      /**
-       * momo api call comes here
-       * on success,
-       * make call to backend api to 
-       * save order on db
-      */
-      
+      // payStack call
+      this.api.makePayment(this.jenPay).subscribe(response => {
+        console.log(response);
+        this.dataBucket = response;
+        window.open(this.dataBucket.message);
+      });
+
       for (let i = 0; i <= this.item.length; ++i) {
         console.log(this.item[i].id);
         this.order = {
@@ -137,24 +137,15 @@ export class CheckoutCartComponent implements OnInit {
 
         this.amount = this.item[i].total;
         console.log(this.amount);
-        // totalAmount.push(this.amount); // -> seems totalAmount isn't being used anywhere
         console.log("Backend Processing object ->", this.order);
-
-        // request object that goes to paystack
-        // refactor to make request to mtn momo collections
-        this.jenPay = {
-          amount: this.amount,
-          email: sessionStorage.getItem('email'),
-          firstName: sessionStorage.getItem('firstName'),
-          productID: this.item[i].id
-        }
+        
         console.log("Payment request object -> ", this.jenPay);
-        // this.api.placeOrder(this.order).subscribe(response => {
-        //   this.dataBucket = response;
-        //   if (this.dataBucket.status === 201) {
-        //     alert('Order Placed Successfully');
-        //   }
-        // })
+        this.api.placeOrder(this.order).subscribe(response => {
+          this.dataBucket = response;
+          if (this.dataBucket.status === 201) {
+            alert('Order Placed Successfully');
+          }
+        })
       }
       this.cart.clearCart();
     } else {

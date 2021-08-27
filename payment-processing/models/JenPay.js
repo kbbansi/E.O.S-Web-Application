@@ -10,7 +10,7 @@ const jenPaySchema = new mongoose.Schema({
         required: true
     },
     amount: {type: Number, required: true},
-    productID: {type: Number, required: true},
+    //productID: {type: Number, required: true},
     reference: {type: String, required: true}
 });
 

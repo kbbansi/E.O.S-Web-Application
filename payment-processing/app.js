@@ -29,13 +29,13 @@ app.get('/', (req, res) => {
 
 app.use(cors());
 app.post('/paystack/pay', (req, res) => {
-    const form = _.pick(req.body, ['amount', 'email', 'firstName', 'productID']);
+    const form = _.pick(req.body, ['amount', 'email', 'firstName']);
 
     console.log(req.body)
 
     form.metadata = {
         firstName: form.firstName,
-        productID: form.productID
+        email: form.email
     }
 
     form.amount *= 100;
@@ -63,11 +63,11 @@ app.get('/paystack/callback', (req, res) => {
         }
         response = JSON.parse(body);
 
-        const data = _.at(response.data, ['reference', 'amount', 'customer.email', 'metadata.firstName', 'metadata.productID']);
+        const data = _.at(response.data, ['reference', 'amount', 'customer.email', 'metadata.firstName']);
 
-        [reference, amount, email, firstName, productID] = data;
+        [reference, amount, email, firstName] = data;
 
-        pay_jen = { reference, amount, email, firstName, productID }
+        pay_jen = { reference, amount, email, firstName}
 
         const jenPay = new JenPay(pay_jen)
         jenPay.save().then((jenPay) => {
