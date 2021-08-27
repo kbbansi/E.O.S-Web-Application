@@ -117,7 +117,7 @@ export class CheckoutCartComponent implements OnInit {
       this.jenPay = {
         amount: sum,
         firstName:sessionStorage.getItem('firstName'),
-        email: 'kwabenaampofo5@gmail.com'
+        email: sessionStorage.getItem('email')
       }
 
       // payStack call
@@ -138,7 +138,7 @@ export class CheckoutCartComponent implements OnInit {
         this.amount = this.item[i].total;
         console.log(this.amount);
         console.log("Backend Processing object ->", this.order);
-        
+
         console.log("Payment request object -> ", this.jenPay);
         this.api.placeOrder(this.order).subscribe(response => {
           this.dataBucket = response;
