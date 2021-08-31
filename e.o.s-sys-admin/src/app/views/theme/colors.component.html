@@ -1,8 +1,11 @@
 <div class="animated fadeIn">
   <div class="card">
     <div class="card-header">
-      <i class="icon-drop"></i> Store Managers
       <!-- Todo:: Add button to Add new Store Manager -->
+      <button class="btn btn-sm btn-primary" data-toggle="modal"
+      (click)="addStoreManagerModal(StoreManagerModal)">
+        Add a Store Manager <i class="fa fa-plus"></i>
+      </button>
     </div>
     <div class="card-body">
       <!-- Replace with Table of Store Managers -->
@@ -19,7 +22,7 @@
         </thead>
         <tbody *ngIf="storeManagers.length > 0">
           <tr *ngFor="let s of storeManagers">
-            <td>{{ s.id }}</td>
+            <td>SM-{{ s.id }}</td>
             <td>{{ s.firstName }}</td>
             <td>{{ s.lastName }}</td>
             <td>{{ s.userName }}</td>
@@ -31,3 +34,68 @@
     </div>
   </div>
 </div>
+
+<ng-template #StoreManagerModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-right">Add a New Store Manager</h4>
+    <button class="close pull-right" type="button" aria-label="Close"
+    (click)="closeOpenModal()">
+      <span aria-hidden="true">
+        &times;
+      </span>
+    </button>
+  </div>
+  <form [formGroup]="managerForm">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" formControlName="firstName">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" formControlName="lastName">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Other Names</label>
+            <input type="text" class="form-control" formControlName="otherNames">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="email">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Contact No</label>
+            <input type="tel" class="form-control" formControlName="contactNo">
+          </div>
+        </div>
+        <!-- <div class="col">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control">
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-sm btn-block btn-primary" (click)="addNewStoreManager()">Add Manager</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #viewStoreManagerDetails></ng-template>
