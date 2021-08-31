@@ -1,8 +1,10 @@
 <div class="animated fadeIn">
   <div class="card">
     <div class="card-header">
-      Sales Personnel
       <!-- Todo:: Add button to Add new Sales Personnel -->
+      <button class="btn btn-sm btn-primary" data-toggle="modal" (click)="addSalesPersonnelModal(SalesPersonnelModal)">
+        Add a Sales Personnel <i class="fa fa-plus"></i>
+      </button>
     </div>
     <div class="card-body">
       <table class="table table-responsive-sm">
@@ -30,3 +32,57 @@
     </div>
   </div>
 </div>
+
+<ng-template #SalesPersonnelModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-right"> Add a New Sales Personnel</h4>
+    <button class="close pull-right" type="button" aria-label="Close" (click)="modal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="personnelForm">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" formControlName="firstName">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" formControlName="lastName">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Other Names</label>
+            <input type="text" class="form-control" formControlName="otherNames">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="email">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Contact No</label>
+            <input type="tel" class="form-control" formControlName="contactNo">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-sm btn-block btn-primary" (click)="addSalesPersonnel()">Add Sales Personnel</button>
+    </div>
+  </form>
+</ng-template>

@@ -9,7 +9,7 @@ import { ApiService } from '../../../services/api.service';
 export class ColorsComponent implements OnInit {
   storeManagers: any = {};
   dataBucket: any = {};
-  modelRef: BsModalRef
+  modalRef: BsModalRef
   managerForm: FormGroup
   
   constructor(
@@ -43,7 +43,7 @@ export class ColorsComponent implements OnInit {
       otherNames: ['', Validators.required],
       email: ['', Validators.required],
       contactNo: ['', Validators.required],
-      userType: []
+      userType: 1
     })
   }
   
@@ -56,11 +56,7 @@ export class ColorsComponent implements OnInit {
       contactNo: ['', Validators.required],
       userType: 1
     });
-    this.modelRef = this.modal.show(template);
-  }
-
-  closeOpenModal() {
-    this.modelRef.hide();
+    this.modalRef = this.modal.show(template);
   }
 
   addNewStoreManager() {
@@ -72,7 +68,7 @@ export class ColorsComponent implements OnInit {
         console.log(response);
         this.managerForm.reset();
         this.ngOnInit();
-        this.closeOpenModal();
+        this.modalRef.hide();
       } else {
         alert('Request failed.\nPlease try again later')    
       }

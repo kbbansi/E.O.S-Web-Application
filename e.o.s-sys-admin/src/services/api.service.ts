@@ -29,6 +29,11 @@ export class ApiService {
         .pipe(catchError(ApiService.HandleErr));
   }
 
+  addNewSalesPersonnel(d) {
+    return this.https.post(this.server + '/sys-admin/add-sales-personnel', d, {observe: 'body'})
+        .pipe(catchError(ApiService.HandleErr));
+  }
+
   getAllUsers() {
     return this.https.get(this.server + '/users/', {observe: 'body'})
         .pipe(catchError(ApiService.HandleErr));
