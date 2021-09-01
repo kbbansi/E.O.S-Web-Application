@@ -13,6 +13,7 @@ import { PopoversComponent } from './popovers.component';
 import { ProgressComponent } from './progress.component';
 import { TooltipsComponent } from './tooltips.component';
 import { NavbarsComponent } from './navbars/navbars.component';
+import { PermissionsComponent } from './permissions/permissions.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,13 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'cards'
+      },
+      {
+        path: 'store-manager-permissions',
+        component: PermissionsComponent,
+        data: {
+          title: 'Store Manager Permissions'
+        }
       },
       {
         path: 'cards',
@@ -61,10 +69,10 @@ const routes: Routes = [
         }
       },
       {
-        path: 'carousels',
+        path: 'sales-personnel-permissions',
         component: CarouselsComponent,
         data: {
-          title: 'Carousels'
+          title: 'Sales Personnel Permissions'
         }
       },
       {

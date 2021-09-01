@@ -1,5 +1,8 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ApiService } from '../../../services/api.service';
 
 @Component({
   templateUrl: 'carousels.component.html',
@@ -7,37 +10,42 @@ import { CarouselConfig } from 'ngx-bootstrap/carousel';
     { provide: CarouselConfig, useValue: { interval: 1500, noPause: false } },
   ]
 })
-export class CarouselsComponent implements OnDestroy {
+export class CarouselsComponent implements OnInit {
+  salesPersonnelDataBucket: any;
+  salesPersonnel: any;
 
-  myInterval: number | false = 6000;
-  slides: any[] = [];
-  activeSlideIndex: number = 0;
-  noWrapSlides: boolean = false;
+  modalRef: BsModalRef;
+  salesPersonnelPermForm: FormGroup;
 
-  constructor() {
-    for (let i = 0; i < 4; i++) {
-      this.addSlide();
+  constructor(
+    private api: ApiService,
+    private formBuilder: FormBuilder,
+    private modal: BsModalService
+    ) {
+      this.salesPersonnelForm();
     }
+
+  ngOnInit(): void {
+    this.getsalesPersonnel();
+    this.getsalesPersonnelPerm();
   }
 
-  ngOnDestroy(): void {
-    this.myInterval = 0;
-    this.noWrapSlides = true;
-    this.myInterval = false;
+
+  salesPersonnelForm() {}
+
+  getsalesPersonnel() {
+    console.log('Init get store managers method');
+    this.api.getSalesPersonnel().subscribe(response => {
+      console.info(response);
+      this.salesPersonnelDataBucket = response;
+      if(this.salesPersonnelDataBucket.status === 200) {
+        this.salesPersonnel = this.salesPersonnelDataBucket.message;
+      }
+    });
   }
 
-  addSlide(): void {
-    setTimeout( () => {
-      const seed = Math.random().toString(36).slice(-6);
-      this.slides.push({
-        image: `https://picsum.photos/seed/${seed}/900/500`
-      });
-    }, 500);
-  }
-
-  removeSlide(index?: number): void {
-    const toRemove = index ? index : this.activeSlideIndex;
-    this.slides.splice(toRemove, 1);
+  getsalesPersonnelPerm() {
+    console.log('Init get store managers permission')
   }
 
 }

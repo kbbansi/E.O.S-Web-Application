@@ -54,6 +54,12 @@ export class ApiService {
         .pipe(catchError(ApiService.HandleErr))
   }
 
+  getPermissions() {}
+
+  setAdminPermissions() {}
+
+  setSalesPersonnelPermissions() {}
+
   private static HandleErr(err: HttpErrorResponse) {
     if (err.error instanceof ErrorEvent) {
       console.log(`Encountered an Error: ${err.status}`)

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-lg col-lg-12 col-md-6 col-sm-12">
       <div class="card">
-        <div class="card-header">Sales Personnel Permissions</div>
+        <div class="card-header">Store Manager Permissions</div>
         <div class="card-body">
           <table class="table table-responsive-sm">
             <thead>
@@ -15,8 +15,8 @@
                 <th>Branch</th>
               </tr>
             </thead>
-            <tbody *ngIf="salesPersonnel.length > 0; else noData">
-              <tr *ngFor="let s of salesPersonnel">
+            <tbody *ngIf="storeManager.length > 0; else noData">
+              <tr *ngFor="let s of storeManager">
                 <td>SM-{{ s.id }}</td>
                 <td>{{ s.userName | titlecase }}</td>
                 <td>{{ s.contactNo }}</td>

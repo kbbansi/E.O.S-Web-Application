@@ -26,22 +26,28 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Permissions' //Components
+    name: 'Settings' //Components
   },
   {
-    name: 'Base',
+    name: 'User Permissions',
     url: '/base',
-    icon: 'icon-puzzle',
+    icon: 'cil-cog',
     children: [
-      {
+      /*{
         name: 'Cards',
         url: '/base/cards',
         icon: 'icon-puzzle'
       },
+      */
       {
-        name: 'Carousels',
-        url: '/base/carousels',
-        icon: 'icon-puzzle'
+        name: 'Store Managers',
+        url: '/base/store-manager-permissions',
+        icon: 'cil-apps-settings'
+      },
+      {
+        name: 'Sales Personnel',
+        url: '/base/sales-personnel-permissions',
+        icon: 'cil-blur'
       },
       {
         name: 'Collapses',
