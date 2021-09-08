@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApiService } from '../../../../services/api.service';
 
@@ -14,6 +14,8 @@ export class PermissionsComponent implements OnInit {
 
   modalRef: BsModalRef;
   storeManagersPermForm: FormGroup;
+  
+  isCollapsed: boolean = false;
 
   constructor(
     private api: ApiService,
@@ -29,7 +31,14 @@ export class PermissionsComponent implements OnInit {
   }
 
 
-  storeManagerForm() {}
+  storeManagerForm() {
+    this.storeManagersPermForm = this.formBuilder.group({
+      addProduct: ['', Validators.required],
+      editProduct: ['', Validators.required],
+      addCategory: ['', Validators.required],
+      editCategory: ['', Validators.required]
+    });
+  }
 
   getStoreManagers() {
     console.log('Init get store managers method');
