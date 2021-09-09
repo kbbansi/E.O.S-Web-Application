@@ -26,19 +26,24 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Settings' //Components
+    name: 'Requests' //Components
   },
   {
+    name: 'User Requests',
+    url: '/requests',
+    icon: 'cil-apps-settings'
+  }
+
+  /*{
     name: 'User Permissions',
     url: '/base',
     icon: 'cil-cog',
     children: [
-      /*{
+      {
         name: 'Cards',
         url: '/base/cards',
         icon: 'icon-puzzle'
       },
-      */
       {
         name: 'Store Managers',
         url: '/base/store-manager-permissions',
@@ -253,5 +258,5 @@ export const navItems: INavData[] = [
     icon: 'icon-layers',
     variant: 'danger',
     attributes: { target: '_blank', rel: 'noopener' }
-  }
+  }*/
 ];

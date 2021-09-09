@@ -45,6 +45,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { UserRequestsComponent } from './views/user-requests/user-requests.component';
 
 @NgModule({
   imports: [
@@ -73,7 +74,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserRequestsComponent
   ],
   providers: [
     {

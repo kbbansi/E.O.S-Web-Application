@@ -1,4 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { error } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -54,11 +55,30 @@ export class ApiService {
         .pipe(catchError(ApiService.HandleErr))
   }
 
-  getPermissions() {}
+  getPermissions() {
+    return this.https.get(this.server + '/user-permissions', {observe: 'body'})
+        .pipe(catchError(ApiService.PermErr));
+  }
 
-  setAdminPermissions() {}
+  setAdminPermissions(d) {
+    return this.https.post(this.server + '/user-permissions/create-user-permissions', d , {observe: 'body'})
+        .pipe(catchError(ApiService.PermErr));
+  }
 
-  setSalesPersonnelPermissions() {}
+  getStoreManagerPerm(id) {
+    return this.https.get(this.server + '/user-permissions/' + id, {observe: 'body'})
+        .pipe(catchError(ApiService.PermErr));
+  }
+
+  getUserRequests() {
+    return this.https.get(this.server + '/user-requests', {observe: 'body'})
+        .pipe(catchError(ApiService.RequestErrHandle))
+  }
+
+  closeRequest(d) {
+    return this.https.put(this.server + '/user-requests/update-request/' + d.id, d , {observe: 'body'})
+        .pipe(catchError(ApiService.RequestErrHandle))
+  }
 
   private static HandleErr(err: HttpErrorResponse) {
     if (err.error instanceof ErrorEvent) {
@@ -78,6 +98,74 @@ export class ApiService {
         case 404:
           console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
           alert('The Requested Resource cannot be Found')
+          break;
+
+        case 403:
+          console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
+          alert('You are forbidden from making this request')
+          break;
+
+        default:
+          console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
+          alert('There was an error in processing your request')
+          break;
+      }
+    }
+    return throwError('Could not process the request at this time')
+  }
+
+  private static PermErr(err: HttpErrorResponse) {
+    if (err.error instanceof ErrorEvent) {
+      console.error(`Client not connect to network, Code: ${err.status}`);
+    } else {
+      switch (err.status) {
+        case 400:
+          console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
+          alert('There was an error in processing your request')
+          break;
+
+          case 500:
+            console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
+            alert('Unable to Connect to the Server')
+            break;
+  
+          case 404:
+            console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
+            alert('No Permissions Set for this User!')
+            break;
+  
+          case 403:
+            console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
+            alert('You are forbidden from making this request')
+            break;
+  
+          default:
+            console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
+            alert('There was an error in processing your request')
+            break;
+      }
+    }
+    return throwError('Could not process the request at this time')
+  }
+
+  private static RequestErrHandle(err: HttpErrorResponse) {
+    if (err.error instanceof ErrorEvent) {
+      console.log(`Encountered an Error: ${err.status}`)
+    } else {
+      switch (err.status) {
+        case 400:
+          console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
+          alert('There was an error in processing your request')
+          break;
+
+        case 500:
+          console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
+          alert('Unable to Connect to the Server')
+          break;
+
+        case 404:
+          console.log(`Server Returned: ${err.status}. Dev Message: ${err.message}`);
+          alert('No New Messages at this moment')
           break;
 
         case 403:

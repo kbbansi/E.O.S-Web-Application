@@ -8,6 +8,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { UserRequestsComponent } from './views/user-requests/user-requests.component';
 
 export const routes: Routes = [
   {
@@ -81,7 +82,14 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
-      }
+      },
+      {
+        path: 'requests',
+        component: UserRequestsComponent,
+        data: {
+          title: 'Requests'
+        }
+      },
     ]
   },
   { path: '**', component: P404Component }
