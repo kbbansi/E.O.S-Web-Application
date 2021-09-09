@@ -10,6 +10,7 @@ import { ApiService } from '../../../../services/api.service';
 })
 export class PermissionsComponent implements OnInit {
   storeManagerDataBucket: any;
+  permDataBucket: any;
   storeManager: any;
 
   modalRef: BsModalRef;
@@ -27,7 +28,6 @@ export class PermissionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getStoreManagers();
-    this.getStoreManagerPerm();
   }
 
 
@@ -51,8 +51,12 @@ export class PermissionsComponent implements OnInit {
     });
   }
 
-  getStoreManagerPerm() {
+  getStoreManagerPerm(id: Number) {
     console.log('Init get store managers permission')
+    this.api.getStoreManagerPerm(id).subscribe(response => {
+      this.permDataBucket = response;
+      console.log(this.permDataBucket.message);
+    });
   }
 
 }

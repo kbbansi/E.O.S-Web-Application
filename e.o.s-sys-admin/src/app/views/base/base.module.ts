@@ -52,8 +52,8 @@ import { PermissionsComponent } from './permissions/permissions.component';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule,
     BaseRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule,

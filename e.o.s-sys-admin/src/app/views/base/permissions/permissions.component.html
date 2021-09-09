@@ -13,7 +13,7 @@
               </tr>
             </thead>
             <tbody *ngIf="storeManager.length > 0; else noData">
-              <tr *ngFor="let s of storeManager">
+              <tr *ngFor="let s of storeManager" (click)="getStoreManagerPerm(s.id)">
                 <td>SM-{{ s.id }}</td>
                 <td>{{ s.userName | titlecase }}</td>
               </tr>
@@ -31,6 +31,102 @@
         </div>
         <div class="card-body">
           <tabset>
+            <tab>
+              <ng-template tabHeading>
+                <i class="fa fa-info-circle text-muted">Active Permissions</i>
+              </ng-template>
+              <form>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group row">
+                      <label class="col-md-3 col-form-label">Can Add Products</label>
+                      <div class="col-md-9 col-form-label">
+                        <div class="form-check form-check-inline mr-1">
+                          <input type="radio" class="form-check-input" value="1">
+                          <label class="form-check-label">Yes</label>
+                        </div>
+
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        <div class="form-check form-check-inline mr-1">
+                          <input type="radio" class="form-check-input" value="0">
+                          <label class="form-check-label">No</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group row">
+                      <label class="col-md-3 col-form-label">Edit Product</label>
+                      <div class="col-md-9 col-form-label">
+                        <label class="switch switch-3d switch-primary">
+                          <input type="checkbox" class="switch-input" disabled>
+                          <span class="switch-slider"></span>
+                        </label>
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        <label class="switch switch-3d switch-secondary">
+                          <input type="checkbox" class="switch-input" disabled>
+                          <span class="switch-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group row">
+                      <label class="col-md-3 col-form-label">Add Category</label>
+                      <div class="col-md-9 col-form-label">
+                        <label class="switch switch-3d switch-primary">
+                          <input type="checkbox" class="switch-input" disabled>
+                          <span class="switch-slider"></span>
+                        </label>
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        <label class="switch switch-3d switch-secondary">
+                          <input type="checkbox" class="switch-input" disabled>
+                          <span class="switch-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group row">
+                      <label class="col-md-3 col-form-label">Edit Category</label>
+                      <div class="col-md-9 col-form-label">
+                        <label class="switch switch-3d switch-primary">
+                          <input type="checkbox" class="switch-input" formControlName="editCategory" disabled>
+                          <span class="switch-slider"></span>
+                        </label>
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
+                        <label class="switch switch-3d switch-secondary">
+                          <input type="checkbox" class="switch-input" formControlName="editCategory" disabled>
+                          <span class="switch-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </tab>
+
             <tab>
               <ng-template tabHeading>
                 <i class="fa fa-info-circle text-muted">Permissions</i>
@@ -123,14 +219,16 @@
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group form-action pull-right">
+                      <button type="button" class="btn btn-sm btn-success">Save Permissions</button>
+                    </div>
+                  </div>
+                </div>
               </form>
             </tab>
           </tabset>
-        </div>
-        <div class="card-footer">
-          <button type="button" class="btn btn-sm btn-primary pull-right">
-            Save Permissions
-          </button>
         </div>
       </div>
     </div>
