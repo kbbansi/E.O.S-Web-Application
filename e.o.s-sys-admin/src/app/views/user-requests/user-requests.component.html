@@ -16,5 +16,91 @@
                 </div>
             </div>
         </div>
+
+        <!-- Request Details -->
+        <div class="col-lg-8 col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Request Details
+                </div>
+                <div class="card-body">
+                    <tabset>
+                        <tab>
+                            <ng-template tabHeading>
+                                <i class="fa fa-info-circle text-muted">Info tab</i>
+                            </ng-template>
+                            <form>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>User Name</label>
+                                            <input type="text" class="form-control" placeholder="User Name" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Date Requested</label>
+                                            <input type="text" class="form-control" placeholder="2021-09-12" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" placeholder="example@email.com" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label>Message</label>
+                                            <input type="text" class="form-control" placeholder="example request" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group form-action pull-right">
+                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" (click)="openPasswordResetModal(passwordResetModal)">Reset Password</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Password modal -->
+<ng-template #passwordResetModal>
+    <div class="modal-header">
+        <h4 class="modal-title pull-right">Reset Password</h4>
+        <button class="close pull-right" type="button" aria-label="Close" >
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Enter new Password</label>
+                        <input type="password" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-sm btn-primary">Reset Password</button>
+        </div>
+    </form>
+</ng-template>
