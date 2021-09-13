@@ -266,7 +266,6 @@ router.get('/reports/day/:reportDay', function (req, res) {
                     `
     db.query(query, function (err, rows) {
         if (!err) {
-            console.log(query);
             if (isEmpty(rows)) {
                 console.log('No orders for %s', reportDay, ' found');
                 res.status(404);
@@ -275,7 +274,7 @@ router.get('/reports/day/:reportDay', function (req, res) {
                     message: 'No orders found'
                 });
             } else {
-                console.log(rows);
+                console.log('Daily Report Generated');
                 res.status(200);
                 res.json({
                     status: 200,
@@ -311,7 +310,6 @@ router.get('/reports/month/:reportMonth', function (req, res) {
                     `
     db.query(query, function (err, rows) {
         if (!err) {
-            console.log(query);
             if (isEmpty(rows)) {
                 console.log('No orders for %s', reportMonth, ' found');
                 res.status(404);
@@ -320,7 +318,7 @@ router.get('/reports/month/:reportMonth', function (req, res) {
                     message: 'No orders found'
                 });
             } else {
-                console.log(rows);
+                console.log('Monthly Report Generated');
                 res.status(200);
                 res.json({
                     status: 200,
@@ -336,6 +334,84 @@ router.get('/reports/month/:reportMonth', function (req, res) {
             });
         }
     });
+});
+
+router.get('/reports/dailySales/:day', function (req, res) {
+    const day = req.params.day;
+    query = `
+    select sum(totalPrice) as 
+        Daily_Sales from order_product 
+    where 
+        createdOn 
+    like  '%${day}%';
+    `;
+    
+    db.query(query, function (err, rows) {
+        if (!err) {
+            //console.log(query);
+            if (isEmpty(rows)) {
+                console.log('No Sales Made for %s', day);
+                res.status(404);
+                res.json({
+                    status: 404,
+                    message: 'No sales made'
+                });
+            } else {
+                console.log('Daily Sale Total Generated');
+                res.status(200);
+                res.json({
+                    status: 200,
+                    message: rows
+                })
+            }
+        } else {
+            console.log(`Got an error: ${err.message}`);
+            res.status(400);
+            res.json({
+                status: 400,
+                message: `FAIL, BAD REQUEST, ${err.message}`
+            });
+        }
+    })
+});
+
+router.get('/reports/monthlySales/:month', function (req, res) {
+    const month = req.params.month;
+    query = `
+    select sum(totalPrice) as 
+        Monthly_Sales from order_product 
+    where 
+        createdOn 
+    like  '%${month}%';
+    `;
+
+    db.query(query, function (err, rows) {
+        if (!err) {
+            console.log(query);
+            if (isEmpty(rows)) {
+                console.log('No Sales Made for %s', month);
+                res.status(404);
+                res.json({
+                    status: 404,
+                    message: 'No sales made'
+                });
+            } else {
+                console.log('Monthly Sale Report Generated');
+                res.status(200);
+                res.json({
+                    status: 200,
+                    message: rows
+                })
+            }
+        } else {
+            console.log(`Got an error: ${err.message}`);
+            res.status(400);
+            res.json({
+                status: 400,
+                message: `FAIL, BAD REQUEST, ${err.message}`
+            });
+        }
+    })
 });
 
 
@@ -396,7 +472,7 @@ function sendOrderEmail(productName, userID, totalPrice) {
             // send email
             mailDataObject = {
                 to: rows[0].email,
-                from: 'jennifer.tagoe@regent.edu.gh',
+                from: 'ladynaad@gmail.com',
                 subject: 'Order Fulfillment',
                 firstName: rows[0].firstName,
                 productName: productName,

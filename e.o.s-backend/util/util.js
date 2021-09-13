@@ -67,7 +67,7 @@ exports.mailServer = function (serviceName, data) {
                 text: mailObject.message,
                 html: mailObject.htmlMessage,
                 auth: {
-                    user: "kwabenaampofo5@gmail.com",
+                    user: "ladynaad@gmail.com",
                     refreshToken: process.env.refreshToken,
                     accessToken: newAccessToken,
                     expires: 1484314697598
@@ -122,7 +122,7 @@ exports.mailServer = function (serviceName, data) {
                 text: mailObject.message,
                 html: mailObject.htmlMessage,
                 auth: {
-                    user: "kwabenaampofo5@gmail.com",
+                    user: "ladynaad@gmail.com",
                     refreshToken: process.env.refreshToken,
                     accessToken: newAccessToken,
                     expires: 1484314697598
@@ -140,6 +140,63 @@ exports.mailServer = function (serviceName, data) {
             });
             break;
 
+        case 'request':
+            console.log(data)
+            // transport is a nodeMailer object instance
+            transport = nodeMailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    type: "OAuth2",
+                    clientId: process.env.clientID,
+                    clientSecret: process.env.clientSecret,
+                    access_type: "offline"
+                }
+            });
+
+            // check for callback event and log out some information
+            transport.on('token', token => {
+                console.log('Access Token acquired');
+                console.log('User: %s', token.user);
+                console.log('Access Token: %s', token.accessToken);
+                console.log('Expires in: %s', new Date(token.expires));
+            });
+
+            mailObject = {
+                to: data.to,
+                from: data.from,
+                subject: data.subject,
+                message: 'Dear ' + data.userName + '\nYour password has been successfully reset!\nPlease find your default password below:\n' + data.textPassword,
+                htmlMessage: `Dear <strong>${data.userName}</strong>
+                              <p>Your password has been successfully reset!</p>
+                              <p>Please find your default password below:</p>
+                              <strong>${data.textPassword}</strong>`
+            };
+             // parameters for sending email
+             mailOptions = {
+                from: mailObject.from,
+                to: mailObject.to,
+                subject: 'Password Reset',
+                text: mailObject.message,
+                html: mailObject.htmlMessage,
+                auth: {
+                    user: "ladynaad@gmail.com",
+                    refreshToken: process.env.refreshToken,
+                    accessToken: newAccessToken,
+                    expires: 1484314697598
+                }
+            };
+
+            // send mail
+            transport.sendMail(mailOptions, function (err, info) {
+                if (err) {
+                    console.log(err.message.toString());
+                    return err
+                } else {
+                    console.log(info);
+                    return 200;
+                }
+            });
+            break;
         default:
             console.log(`An Error Occurred`);
     }

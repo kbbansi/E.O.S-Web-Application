@@ -12,6 +12,9 @@ let category = require('./routes/category');
 let product = require('./routes/product');
 let orders = require('./routes/orders');
 let promotions = require('./routes/promotions');
+let sys_admin = require('./routes/sys-admin');
+let user_perm = require('./routes/permissions');
+let requests = require('./routes/requests');
 
 const app = express();
 
@@ -34,7 +37,10 @@ app.use('/auth', login);
 app.use('/category', category);
 app.use('/product', product);
 app.use('/orders', orders);
-app.use('/promotions', promotions)
+app.use('/promotions', promotions);
+app.use('/sys-admin', sys_admin);
+app.use('/user-permissions', user_perm);
+app.use('/user-requests', requests);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -53,7 +53,7 @@ router.post('/create', function (req, res, err) {
                 mailDataObject = {
                   to: user.email,
                   firstName: user.firstName,
-                  from: 'jennifer.tagoe@regent.edu.gh',
+                  from: 'ladynaad@gmail.com',
                   subject: 'Welcome to EOS Enterprise'
                 };
 
@@ -215,10 +215,25 @@ router.put('/user/:id', function (req, res) {
 });
 
 // delete user
-router.delete('/user/delete', function (req, res) {
-  res.status(200);
-  res.json({
-    status: 200,
+router.delete('/user/delete/:id', function (req, res) {
+  id = req.params.id;
+  query = `Delete * from users where id = ${id}`;
+  db.query(query, function (err, rows) {
+    if (!err) {
+      console.log(`User Id ${id} deleted`);
+      res.status(200);
+      res.json({
+        status: 200,
+        message: rows
+      });
+    } else {
+      console.log(`An Error Occurred: -> ${err.message}`);
+      res.status(400);
+      res.json({
+        status: 400,
+        message: `${err.message}`
+      });
+    }
   });
 });
 
