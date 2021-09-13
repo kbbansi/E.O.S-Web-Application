@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ApiService } from '../../../services/api.service';
 
@@ -16,7 +16,9 @@ export class UserRequestsComponent implements OnInit {
   email: String;
   userName: String;
   date: String;
+  user_id: Number;
   userRequestForm: FormGroup;
+  passwordForm: FormGroup;
 
   constructor(private api: ApiService, private formBuilder: FormBuilder, private modalService: BsModalService) {
     this.createUserRequestForm();
@@ -26,7 +28,16 @@ export class UserRequestsComponent implements OnInit {
     this.getAllRequests();
   }
 
-  createUserRequestForm() {}
+  createUserRequestForm() {
+    this.userRequestForm = this.formBuilder.group({
+      user_id: ['', Validators.required],
+      userName: ['', Validators.required],
+      message: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      status: ['', Validators.required]
+    });
+  }
 
   getAllRequests() {
     this.api.getUserRequests().subscribe(response => {
@@ -36,6 +47,39 @@ export class UserRequestsComponent implements OnInit {
     });
   }
 
-  openPasswordResetModal(template: TemplateRef<any>) {}
+  openPasswordResetModal(template: TemplateRef<any>) {
+    this.userRequestForm = this.formBuilder.group({
+      user_id: [this.user_id, Validators.required],
+      userName: [this.userName, Validators.required],
+      message: [this.message, Validators.required],
+      email: [this.email, Validators.required],
+      password: ['', Validators.required],
+      status: ['closed', Validators.required],
+      textPassword: ['', Validators.required]
+    });
+    this.modalRef = this.modalService.show(template);
+    console.log(this.userRequestForm.value);
+  }
+
+  getInfo(data: any) {
+    console.log(data);
+    this.userName = data.userName;
+    this.message = data.message;
+    this.email = data.email;
+    this.user_id = data.user_id;
+  }
+
+  resolveRequest() {
+    let password = this.userRequestForm.value['password'];
+    this.userRequestForm.patchValue({ textPassword: password });
+
+    this.api.closeRequest(this.userRequestForm.value).subscribe(response => {
+      if (response) {
+        console.log(response);
+        alert('User Request successfully resolved')
+        this.ngOnInit();
+      }
+    });
+  }
 
 }
